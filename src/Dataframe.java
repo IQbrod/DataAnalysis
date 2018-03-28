@@ -21,5 +21,29 @@ public class Dataframe {
         //Construction des indexs
         
     }
+    
+    public void fullDisplay() {
+        System.out.println(this.toString());
+    }
+    
+    @Override
+    public String toString() {
+        // Gestion des labels
+        String ret = "Index\t";
+        for(Object el : labels.keySet()) {
+            ret += el.toString() + "\t";
+        }
+        ret += "\n";
+        // Gestion des données
+        for(Object el : indexs.keySet()) {
+            ret += el.toString() + "\t";
+            for(Object el2 : labels.keySet()) {
+                ret += labels.get(el2).get(indexs.get(el)) + "\t";
+            }
+            ret += "\n";
+        }
+        // Retour
+        return ret;
+    }
 }
 
