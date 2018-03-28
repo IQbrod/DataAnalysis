@@ -2,16 +2,15 @@
  *
  * @author MrVhek, IQbrod, Skullhack
  */
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Dataframe {
     private HashMap<Object, Integer> indexs;
-    private HashMap<Object, ArrayList<Object>> labels;
+    private HashMap<Object, List> labels;
 
     //Constructeur avec tableaux
-    public Dataframe(List<Object> indexs, List<Object> labels, List<Object>... data) {
+    public Dataframe(List indexs, List labels, List... data) {
         //Construction des indexs
         this.indexs = new HashMap<>();
         int index = 0;
@@ -20,7 +19,10 @@ public class Dataframe {
             index++;
         }
         //Construction des labels
-        
+        this.labels = new HashMap<>();
+        for (int i=0; i < labels.size(); i++) {
+            this.labels.put(labels.get(i), data[i]);
+        }
     }
     
     public void fullDisplay() {
