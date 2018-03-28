@@ -1,2 +1,3 @@
 Sazerat Jeremy  
-Michaud Adrien
+Michaud Adrien  
+Givaudan Vincent
