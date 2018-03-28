@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -7,12 +9,17 @@ import java.util.List;
  */
 public class Main {
     static public void main(String argv[]) {
-        List idx = Arrays.asList("Paul","Léa","Jack");
-        List lbl = Arrays.asList("Age","Sexe");
+        List idx = Arrays.asList("Paul","Linda","Jack");
+        List lbl = Arrays.asList("Age","Sex");
         List age = Arrays.asList(24,37,29);
-        List name = Arrays.asList('H','F','H');
+        List sex = Arrays.asList('H','F','H');
         
-        Dataframe d = new Dataframe(idx,lbl,age,name);
-        d.fullDisplay();
+        Dataframe d;
+        try {
+            d = new Dataframe(idx,lbl,age,sex);
+            d.fullDisplay();
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

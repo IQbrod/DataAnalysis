@@ -1,16 +1,28 @@
+import exceptions.*;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  *
  * @author MrVhek, IQbrod, Skullhack
  */
-import java.util.HashMap;
-import java.util.List;
 
 public class Dataframe {
     private HashMap<Object, Integer> indexs;
     private HashMap<Object, List> labels;
 
     //Constructeur avec tableaux
-    public Dataframe(List indexs, List labels, List... data) {
+    public Dataframe(List indexs, List labels, List... data) throws LabelException, IdxException {
+        /*** Checking DataSet ***/
+        if (labels.size() != data.length) {
+            throw new LabelException(labels.size(),data.length);
+        }
+        for(int i=0;i<data.length;i++) {
+            if(indexs.size() != data[i].size()) {
+                throw new IdxException(indexs.size(),labels.get(i).toString(),data[i].size());
+            }
+        }
+        
         //Construction des indexs
         this.indexs = new HashMap<>();
         int index = 0;
