@@ -19,6 +19,13 @@ public class Dataframe {
     //Constructeur avec tableaux
     public Dataframe(List<Object> indexs, List<Object> labels, List<Object>... data) {
         //Construction des indexs
+        this.indexs = new HashMap<>();
+        int index = 0;
+        for (Object o : indexs) {
+            this.indexs.put(o, index);
+            index++;
+        }
+        //Construction des labels
         
     }
     
