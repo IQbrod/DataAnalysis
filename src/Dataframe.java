@@ -7,9 +7,19 @@ import java.util.List;
  * @author MrVhek, IQbrod, Skullhack
  */
 
+class attr {
+    public Object label;
+    public List lst;
+    
+    public attr(Object label, List val) {
+        this.label = label;
+        this.lst = val;
+    }
+}
+
 public class Dataframe {
-    private HashMap<Object, Integer> indexs;
-    private HashMap<Object, List> labels;
+    private HashMap<Integer, Object> indexs;
+    private HashMap<Integer, attr> labels;
 
     //Constructeur avec tableaux
     public Dataframe(List indexs, List labels, List... data) throws LabelException, IdxException {
@@ -26,14 +36,16 @@ public class Dataframe {
         //Construction des indexs
         this.indexs = new HashMap<>();
         int index = 0;
-        for (Object o : indexs) {
-            this.indexs.put(o, index);
+        for (int i = 0; i < indexs.size(); i++) {
+            this.indexs.put(index, indexs.get(i));
             index++;
         }
         //Construction des labels
         this.labels = new HashMap<>();
+        index = 0;
         for (int i=0; i < labels.size(); i++) {
-            this.labels.put(labels.get(i), data[i]);
+            this.labels.put(index, new attr(labels.get(index),data[i]));
+            index ++;
         }
     }
     
@@ -45,15 +57,15 @@ public class Dataframe {
     public String toString() {
         // Gestion des labels
         String ret = "Index\t";
-        for(Object el : labels.keySet()) {
-            ret += el.toString() + "\t";
+        for(Integer el : labels.keySet()) {
+            ret += labels.get(el).label.toString() + "\t";
         }
         ret += "\n";
         // Gestion des données
-        for(Object el : indexs.keySet()) {
-            ret += el.toString() + "\t";
-            for(Object el2 : labels.keySet()) {
-                ret += labels.get(el2).get(indexs.get(el)) + "\t";
+        for(Integer el : indexs.keySet()) {
+            ret += indexs.get(el).toString() + "\t";
+            for(Integer el2 : labels.keySet()) {
+                ret += labels.get(el2).lst.get(el) + "\t";
             }
             ret += "\n";
         }
