@@ -1,4 +1,6 @@
-import exceptions.*;
+package com.mogor.mogoranalysor;
+
+import com.mogor.mogoranalysor.exceptions.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
