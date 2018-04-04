@@ -1,5 +1,6 @@
 package com.mogor.mogoranalysor;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,7 +20,14 @@ public class Main {
         Dataframe d;
         try {
             d = new Dataframe(idx,lbl,age,sex);
-            d.fullDisplay();
+            //d.fullDisplay();
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            String fName = "people.csv";
+            d = new Dataframe("src/main/java/com/mogor/mogoranalysor/csvfiles/"+fName);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

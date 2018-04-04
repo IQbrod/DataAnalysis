@@ -56,7 +56,7 @@ public class Dataframe {
     }
     
     //Constructeur par CSV
-    public Dataframe(String filePath) throws LabelException, IdxException, ExtensionException {
+    public Dataframe(String filePath) throws Exception {
         /** Check if file is CSV **/
         int i = filePath.lastIndexOf('.');
         if (i > 0) {
@@ -83,10 +83,21 @@ public class Dataframe {
                 args.add(line.split(splitter));
             }
         } catch (Exception ex) {
-            Logger.getLogger(Dataframe.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        /** Checking data **/
+        if (lab == null) {
+            throw new EmptyCsvException();
+        }
+        if (args.isEmpty()) {
+            throw new EmptyCsvException("");
+        }
+        for (String[] arg : args) {
+            if (arg.length-1 != lab.length) {
+                throw new TupleSizeException(arg[0],arg.length-1,lab.length);
+            }
         }
         /** Transform data **/
-        
         
     }
     
