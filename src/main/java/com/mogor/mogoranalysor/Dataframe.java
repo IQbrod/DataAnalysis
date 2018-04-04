@@ -2,6 +2,7 @@ package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -55,15 +56,37 @@ public class Dataframe {
     }
     
     //Constructeur par CSV
-    public Dataframe(String filePath) throws LabelException, IdxException {
+    public Dataframe(String filePath) throws LabelException, IdxException, ExtensionException {
+        /** Check if file is CSV **/
+        int i = filePath.lastIndexOf('.');
+        if (i > 0) {
+                String expected = "csv";
+                String ext = filePath.substring(i+1).toLowerCase();
+                if (! ext.equals(expected)) {
+                    throw new ExtensionException(expected.toUpperCase(),ext);
+                }
+        } else {
+            throw new ExtensionException();
+        }
         /*** Open and parse CSV file ***/
         String line = "";
         String splitter = ",";
+        /** DataFrame attributes **/
+        String[] lab = null;
+        List<String[]> args = new ArrayList<String[]>();
+        /** Parse file **/
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            
+            if ((line = br.readLine()) != null) { //First Line
+                lab = line.split(splitter);
+            }
+            while ((line = br.readLine()) != null) {
+                args.add(line.split(splitter));
+            }
         } catch (Exception ex) {
             Logger.getLogger(Dataframe.class.getName()).log(Level.SEVERE, null, ex);
         }
+        /** Transform data **/
+        
         
     }
     
