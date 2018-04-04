@@ -5,25 +5,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author MrVhek, IQbrod, Skullhack
  */
 
-class attr {
-    public Object label;
-    public List lst;
-    
-    public attr(Object label, List val) {
-        this.label = label;
-        this.lst = val;
-    }
-}
-
 public class Dataframe {
     private HashMap<Integer, Object> indexs;
-    private HashMap<Integer, attr> labels;
+    private HashMap<Integer, Datacol> labels;
 
     //Constructeur avec tableaux
     public Dataframe(List indexs, List labels, List... data) throws LabelException, IdxException {
@@ -48,7 +40,11 @@ public class Dataframe {
         this.labels = new HashMap<>();
         index = 0;
         for (int i=0; i < labels.size(); i++) {
-            this.labels.put(index, new attr(labels.get(index),data[i]));
+            try {
+                this.labels.put(index, new Datacol(labels.get(index),data[i]));
+            } catch (TypeException ex) {
+                Logger.getLogger(Dataframe.class.getName()).log(Level.SEVERE, null, ex);
+            }
             index ++;
         }
     }
@@ -138,6 +134,15 @@ public class Dataframe {
         }
         // Retour
         return ret;
+    }
+
+    public Datacol getColumn(Object label) {
+        for (int i=0; i<this.labels.size();i++) {
+            if (labels.get(i).label == label) {
+                return labels.get(i);
+            }
+        }
+        return null;
     }
 }
 
