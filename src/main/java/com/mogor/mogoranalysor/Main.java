@@ -20,7 +20,7 @@ public class Main {
         Dataframe d;
         try {
             d = new Dataframe(idx,lbl,age,sex);
-            //d.fullDisplay();
+            d.fullDisplay();
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

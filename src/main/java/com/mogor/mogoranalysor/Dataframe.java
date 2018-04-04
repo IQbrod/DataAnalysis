@@ -105,8 +105,21 @@ public class Dataframe {
         System.out.println(this.toString());
     }
     
+    public void firstLinesDisplay(int i) {
+        System.out.println(partial(0,i-1));
+    }
+    
+    public void lastLinesDisplay(int i) {
+        int s = indexs.keySet().size()-1;
+        System.out.println(partial(s-i+1,s));
+    }
+    
     @Override
     public String toString() {
+        return partial(0,indexs.keySet().size()-1);
+    }
+    
+    private String partial(int beg, int end) {
         // Gestion des labels
         String ret = "Index\t";
         for(Integer el : labels.keySet()) {
@@ -114,12 +127,16 @@ public class Dataframe {
         }
         ret += "\n";
         // Gestion des données
+        int it = 0;
         for(Integer el : indexs.keySet()) {
-            ret += indexs.get(el).toString() + "\t";
-            for(Integer el2 : labels.keySet()) {
-                ret += labels.get(el2).lst.get(el) + "\t";
+            if (it >= beg && it <= end) {
+                ret += indexs.get(el).toString() + "\t";
+                for(Integer el2 : labels.keySet()) {
+                    ret += labels.get(el2).lst.get(el) + "\t";
+                }
+                ret += "\n";
             }
-            ret += "\n";
+            it++;
         }
         // Retour
         return ret;
