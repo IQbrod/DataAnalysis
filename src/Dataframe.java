@@ -1,6 +1,9 @@
 import exceptions.*;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,6 +50,19 @@ public class Dataframe {
             this.labels.put(index, new attr(labels.get(index),data[i]));
             index ++;
         }
+    }
+    
+    //Constructeur par CSV
+    public Dataframe(String filePath) throws LabelException, IdxException {
+        /*** Open and parse CSV file ***/
+        String line = "";
+        String splitter = ",";
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Dataframe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public void fullDisplay() {
