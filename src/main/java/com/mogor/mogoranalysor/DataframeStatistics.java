@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mogor.mogoranalysor;
+package main.java.com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.TypeException;
-
+import java.lang.Number;
 /**
  *
  * @author MrVhek,IQBrod, Skullhack
@@ -18,25 +18,24 @@ public class DataframeStatistics {
         this.d = d;
     }
     
-    public double getMeanCol(Object label) throws TypeException {
+    public double getMeanCol(Object label) throws Exception {
         Datacol datac = d.getColumn(label);
-        if (CheckTyper.checkType(datac.lst.getClass(), int.class)
-            ||CheckTyper.checkType(datac.lst.getClass(), float.class)
-            ||CheckTyper.checkType(datac.lst.getClass(), double.class)) {
+        if (CheckTyper.checkNumber(datac.lst.get(0))) {
             double moyenne = 0;
             for (int i=0;i<datac.lst.size();i++) {
-                moyenne += (double) datac.lst.get(i);
-            }
-            return moyenne/(double) datac.lst.size();
+                Number val = (Number) datac.lst.get(i);
+                moyenne += val.doubleValue()
+;            }
+            return moyenne/datac.lst.size();
         } else {
-            throw new TypeException(double.class, datac.label.getClass());
+            throw new TypeException(Number.class, datac.lst.get(0).getClass());
         }
     }
     
-    public <T extends Comparable<T>> T getMinCol(Object label) throws TypeException {
+    public <T extends Comparable<T>> T getMinCol(Object label) throws Exception {
         Datacol datac = d.getColumn(label);
         T min = null;
-        if (datac != null && CheckTyper.checkType(datac.lst.getClass(), min.getClass())) {
+        if (CheckTyper.checkComparable(datac.lst.get(0))) {
             for (int i=0;i<datac.lst.size();i++) {
                 T t  = (T) datac.lst.get(i);
                 if (min == null) {
@@ -47,14 +46,14 @@ public class DataframeStatistics {
             }
             return min;
         } else {
-            throw new TypeException(min.getClass(), datac.label.getClass());
+            throw new TypeException(min.getClass(), datac.lst.get(0).getClass());
         }
     }
     
-    public <T extends Comparable<T>> T getMaxCol(Object label) throws TypeException {
+    public <T extends Comparable<T>> T getMaxCol(Object label) throws Exception {
         Datacol datac = d.getColumn(label);
         T max = null;
-        if (datac != null && CheckTyper.checkType(datac.lst.getClass(), max.getClass())) {
+        if (CheckTyper.checkType(datac.lst.getClass(), max.getClass())) {
             for (int i=0;i<datac.lst.size();i++) {
                 T t  = (T) datac.lst.get(i);
                 if (max == null) {
