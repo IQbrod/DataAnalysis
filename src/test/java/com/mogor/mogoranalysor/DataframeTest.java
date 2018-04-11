@@ -20,11 +20,8 @@ public class DataframeTest {
     }
     
     @Test
-    public void testFirstLine() {
-        Assert.assertEquals("Index	age	sex	\n" +
-                    "John	30	H	\n" +
-                    "Mary	29	F	\n" +
-                    "Anna	18	F	", subjectFile.toString());
+    public void testFullDisplay() {
+        Assert.assertEquals("Index\tage\tsex\t\nJohn\t30\tH\t\nMary\t29\tF\t\nAnna\t18\tF\t\n", subjectFile.toString());
     }
 }
 
