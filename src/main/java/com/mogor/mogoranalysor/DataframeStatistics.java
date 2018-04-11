@@ -6,7 +6,7 @@
 package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.TypeException;
-
+import java.lang.Number;
 /**
  *
  * @author MrVhek,IQBrod, Skullhack
@@ -19,56 +19,52 @@ public class DataframeStatistics {
     }
     
     public double getMeanCol(Object label) throws Exception {
-        Object[] o = {label};
-        Datacol datac = d.getColumns(o).get(0);
-        if (CheckTyper.checkType(datac.lst.getClass(), int.class)
-            ||CheckTyper.checkType(datac.lst.getClass(), float.class)
-            ||CheckTyper.checkType(datac.lst.getClass(), double.class)) {
+        Datacol datac = d.getColumn(label);
+        if (CheckTyper.checkNumber(datac.lst.get(0))) {
             double moyenne = 0;
-            for (int i=0;i<datac.lst.size();i++) {
-                moyenne += (double) datac.lst.get(i);
-            }
-            return moyenne/(double) datac.lst.size();
+            for (Object lst : datac.lst) {
+                Number val = (Number) lst;
+                moyenne += val.doubleValue()
+                        ;           }
+            return moyenne/datac.lst.size();
         } else {
-            throw new TypeException(double.class, datac.label.getClass());
+            throw new TypeException(Number.class, datac.lst.get(0).getClass());
         }
     }
     
     public <T extends Comparable<T>> T getMinCol(Object label) throws Exception {
-        Object[] o = {label};
-        Datacol datac = d.getColumns(o).get(0);
+        Datacol datac = d.getColumn(label);
         T min = null;
-        if (CheckTyper.checkType(datac.lst.getClass(), min.getClass())) {
-            for (int i=0;i<datac.lst.size();i++) {
-                T t  = (T) datac.lst.get(i);
+        if (CheckTyper.checkComparable(datac.lst.get(0))) {
+            for (Object lst : datac.lst) {
+                T t = (T) lst;
                 if (min == null) {
                     min = t;
-                } else if (t.compareTo(min) == -1) {
+                } else if (t.compareTo(min) < 0) {
                     min = t;
                 }
             }
             return min;
         } else {
-            throw new TypeException(min.getClass(), datac.label.getClass());
+            throw new TypeException(min.getClass(), datac.lst.get(0).getClass());
         }
     }
     
     public <T extends Comparable<T>> T getMaxCol(Object label) throws Exception {
-        Object[] o = {label};
-        Datacol datac = d.getColumns(o).get(0);
+        Datacol datac = d.getColumn(label);
         T max = null;
-        if (CheckTyper.checkType(datac.lst.getClass(), max.getClass())) {
-            for (int i=0;i<datac.lst.size();i++) {
-                T t  = (T) datac.lst.get(i);
+        if (CheckTyper.checkComparable(datac.lst.get(0))) {
+            for (Object lst : datac.lst) {
+                T t = (T) lst;
                 if (max == null) {
                     max = t;
-                } else if (t.compareTo(max) == 1) {
+                } else if (t.compareTo(max) > 0) {
                     max = t;
                 }
             }
             return max;
         } else {
-            throw new TypeException(max.getClass(), datac.label.getClass());
+            throw new TypeException(max.getClass(), datac.lst.get(0).getClass());
         }
     }
 }
