@@ -172,6 +172,16 @@ public class DataframeTest {
         subjectFile = new Dataframe(idx,lbl,age,sex);
     }
     
+    @Test (expected=TypeException.class)
+    public void testMultipleTypeConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex");
+        age = Arrays.asList(24,"ERROR",29);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex);
+    }
+    
     /**  TEST METHODES  **/
     @Test
     public void testFullDisplay() {

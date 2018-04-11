@@ -45,7 +45,7 @@ public class Dataframe {
             try {
                 this.labels.put(index, new Datacol(labels.get(index), data[i]));
             } catch (TypeException ex) {
-                Logger.getLogger(Dataframe.class.getName()).log(Level.SEVERE, null, ex);
+                throw ex;
             }
             index++;
         }
