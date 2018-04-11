@@ -165,7 +165,7 @@ public class Dataframe {
         List<Datacol> lst = new ArrayList<Datacol>();
         for(Object label : labels) {  
             for (i=0; i<this.labels.size();i++) {
-                if (this.labels.get(i).label == label) {
+                if (this.labels.get(i).label.equals(label)) {
                     lst.add(this.labels.get(i));
                     break;
                     
@@ -184,7 +184,7 @@ public class Dataframe {
         for (Object index : indexs) {
             l = new ArrayList<Object>();
             for (Integer el : this.indexs.keySet()) {
-                if (this.indexs.get(el) == index) {
+                if (this.indexs.get(el).equals(index)) {
                     for (Integer el2 : this.labels.keySet()) {
                         l.add(this.labels.get(el2).lst.get(el));
                     }
