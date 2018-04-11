@@ -18,15 +18,6 @@ import org.junit.Test;
 public class DataframeTest {
     private Dataframe subjectFile;
 
-    @Test
-    public void testFullDisplay() {
-        try {
-            subjectFile = new Dataframe("data/people.csv");
-        } catch (Exception ex) {
-            Assert.fail("No Exception should be thrown for data/people.csv");
-        }
-        Assert.assertEquals("Index\tage\tsex\t\nJohn\t30\tH\t\nMary\t29\tF\t\nAnna\t18\tF\t\n", subjectFile.toString());
-    }
     /**  TEST CONSTRUCTEUR  **/
     /**  Constructeur CSV  **/
     @Test (expected = FileNotFoundException.class)
@@ -44,6 +35,25 @@ public class DataframeTest {
         subjectFile = new Dataframe("myfile.java");
     }
     
+    @Test (expected = EmptyCsvException.class)
+    public void testEmptyConstructorCSV() throws Exception {
+        subjectFile = new Dataframe("data/empty.csv");
+    }
+    
+    @Test (expected = EmptyCsvException.class)
+    public void testOnlyLabelsConstructorCSV() throws Exception {
+        subjectFile = new Dataframe("data/labonly.csv");
+    }
+    
     /**  TEST METHODES  **/
+    @Test
+    public void testFullDisplay() {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Assert.assertEquals("Index\tage\tsex\t\nJohn\t30\tH\t\nMary\t29\tF\t\nAnna\t18\tF\t\n", subjectFile.toString());
+    }
 }
 

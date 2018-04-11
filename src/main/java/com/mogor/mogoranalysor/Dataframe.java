@@ -110,10 +110,6 @@ public class Dataframe {
          * Cast Types from String *
          */
         // NOT YET IMPLEMENTED
-
-        /**
-         * Transform data *
-         */
         //Construction des indexs
         this.indexs = new HashMap<>();
         int index = 0;
