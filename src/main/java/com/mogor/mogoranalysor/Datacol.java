@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.com.mogor.mogoranalysor;
+package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.TypeException;
 import java.util.List;
@@ -36,7 +36,7 @@ public class Datacol {
     }
     
         
-    public List<Object> getLisObject() {
+    public List<Object> getListObject() {
         return this.lst;
     }
 }

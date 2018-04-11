@@ -1,4 +1,4 @@
-package main.java.com.mogor.mogoranalysor;
+package com.mogor.mogoranalysor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +35,9 @@ public class Main {
         List lbl = Arrays.asList("Age","Sex");
         List age = Arrays.asList(24,37,29);
         List sex = Arrays.asList('H','F','H');
+        int compareTo;
+        compareTo = "H".compareTo("F");
+        System.out.println(compareTo);
         
         Dataframe d;
         try {
@@ -42,17 +45,18 @@ public class Main {
             d.fullDisplay();
             DataframeStatistics dfs;
             dfs = new DataframeStatistics(d);
-            System.out.println(dfs.getMinCol("Sex").toString());
+            System.out.println(dfs.getMaxCol("Age").toString());
+            d.firstLinesDisplay(0);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
             String fName = "people.csv";
-            d = new Dataframe("src/main/java/com/mogor/mogoranalysor/csvfiles/"+fName);
+            d = new Dataframe("data/"+fName);
             d.fullDisplay();
             DataframeStatistics dfs = new DataframeStatistics(d);
-            System.out.println(dfs.getMinCol("sex").toString());
+            System.out.println(dfs.getMaxCol("age").toString());
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

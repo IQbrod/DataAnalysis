@@ -1,4 +1,4 @@
-package main.java.com.mogor.mogoranalysor;
+package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.*;
 import java.io.*;
@@ -106,6 +106,10 @@ public class Dataframe {
         /**
          * Transform data *
          */
+        /** Cast Types from String **/
+        // NOT YET IMPLEMENTED
+        
+        /** Transform data **/
         //Construction des indexs
         this.indexs = new HashMap<>();
         int index = 0;
@@ -123,6 +127,7 @@ public class Dataframe {
             for (int j = 0; j < args.size(); j++) {
                 lst.add(args.get(j)[i]);
             }
+            System.out.println(lab[i - 1].getClass().toString());
             this.labels.put(index, new Datacol(lab[i - 1], lst));
             index++;
         }
@@ -177,25 +182,44 @@ public class Dataframe {
         }
     }
 
-    public List<Datacol> getColumns(Object[] labels) throws UnknownLabelException {
+    public List<Datacol> getColumns(Object[] labels) throws UnknownException {
         int i;
         List<Datacol> lst = new ArrayList<Datacol>();
         for (Object label : labels) {
             for (i = 0; i < this.labels.size(); i++) {
-                if (this.labels.get(i).label == label) {
+                if (this.labels.get(i).label.equals(label)) {
                     lst.add(this.labels.get(i));
                     break;
 
                 }
             }
             if (i == this.labels.size()) {
-                throw new UnknownLabelException(label.toString());
+                throw new UnknownException("Label",label.toString());
             }
         }
         return lst;
     }
+    
+    public List<List<Object>> getLines(Object[] indexs) throws UnknownException {
+        List<List<Object>> lst = new ArrayList<List<Object>>();
+        for (Object index : indexs) {
+            List<Object> l = new ArrayList<Object>();
+            for (Integer el : this.indexs.keySet()) {
+                if (this.indexs.get(el) == index) {
+                    for (Integer el2 : this.labels.keySet()) {
+                        l.add(this.labels.get(el2).lst.get(el));
+                    }
+                }
+            }
+            if (l.isEmpty()) {
+                throw new UnknownException("Index", index.toString());
+            }
+            lst.add(l);
+        }
+        return lst;
+    }
 
-    public Datacol getColumn(Object label) throws UnknownLabelException {
+    public Datacol getColumn(Object label) throws UnknownException {
         Object[] o = {label};
         return getColumns(o).get(0);
     }
