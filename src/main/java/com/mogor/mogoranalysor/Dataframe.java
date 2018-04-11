@@ -92,6 +92,27 @@ public class Dataframe {
             }
         }
         /** Transform data **/
+        //Construction des indexs
+        this.indexs = new HashMap<>();
+        int index = 0;
+        for (i=0;i<args.size();i++) {
+            this.indexs.put(index, args.get(i)[0]);
+            index++;
+        }
+        
+        //Construction des labels
+        this.labels = new HashMap<>();
+        index = 0;
+        int len = args.get(0).length;
+        for (i=1; i < len; i++) {
+            List lst = new ArrayList<>();
+            for(int j=0;j<args.size();j++) {
+                lst.add(args.get(j)[i]);
+            }
+            this.labels.put(index, new Datacol(lab[i-1],lst));
+            index++;
+        }
+        
         
     }
     
@@ -136,13 +157,22 @@ public class Dataframe {
         return ret;
     }
 
-    public Datacol getColumn(Object label) {
-        for (int i=0; i<this.labels.size();i++) {
-            if (labels.get(i).label == label) {
-                return labels.get(i);
+    public List<Datacol> getColumns(Object[] labels) throws UnknownLabelException {
+        int i;
+        List<Datacol> lst = new ArrayList<Datacol>();
+        for(Object label : labels) {  
+            for (i=0; i<this.labels.size();i++) {
+                if (this.labels.get(i).label == label) {
+                    lst.add(this.labels.get(i));
+                    break;
+                    
+                }
+            }
+            if (i == this.labels.size()) {
+                throw new UnknownLabelException(label.toString());
             }
         }
-        return null;
+        return lst;
     }
 }
 
