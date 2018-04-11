@@ -109,7 +109,7 @@ public class Dataframe {
             for(int j=0;j<args.size();j++) {
                 lst.add(args.get(j)[i]);
             }
-            this.labels.put(index, new attr(lab[i-1],lst));
+            this.labels.put(index, new Datacol(lab[i-1],lst));
             index++;
         }
         
