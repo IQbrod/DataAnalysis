@@ -157,13 +157,22 @@ public class Dataframe {
         return ret;
     }
 
-    public Datacol getColumn(Object label) {
-        for (int i=0; i<this.labels.size();i++) {
-            if (labels.get(i).label == label) {
-                return labels.get(i);
+    public List<Datacol> getColumns(Object[] labels) throws UnknownLabelException {
+        int i;
+        List<Datacol> lst = new ArrayList<Datacol>();
+        for(Object label : labels) {  
+            for (i=0; i<this.labels.size();i++) {
+                if (this.labels.get(i).label == label) {
+                    lst.add(this.labels.get(i));
+                    break;
+                    
+                }
+            }
+            if (i == this.labels.size()) {
+                throw new UnknownLabelException(label.toString());
             }
         }
-        return null;
+        return lst;
     }
 }
 

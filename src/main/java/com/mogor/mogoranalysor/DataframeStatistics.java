@@ -18,8 +18,9 @@ public class DataframeStatistics {
         this.d = d;
     }
     
-    public double getMeanCol(Object label) throws TypeException {
-        Datacol datac = d.getColumn(label);
+    public double getMeanCol(Object label) throws Exception {
+        Object[] o = {label};
+        Datacol datac = d.getColumns(o).get(0);
         if (CheckTyper.checkType(datac.lst.getClass(), int.class)
             ||CheckTyper.checkType(datac.lst.getClass(), float.class)
             ||CheckTyper.checkType(datac.lst.getClass(), double.class)) {
@@ -33,8 +34,9 @@ public class DataframeStatistics {
         }
     }
     
-    public <T extends Comparable<T>> T getMinCol(Object label) throws TypeException {
-        Datacol datac = d.getColumn(label);
+    public <T extends Comparable<T>> T getMinCol(Object label) throws Exception {
+        Object[] o = {label};
+        Datacol datac = d.getColumns(o).get(0);
         T min = null;
         if (datac != null && CheckTyper.checkType(datac.lst.getClass(), min.getClass())) {
             for (int i=0;i<datac.lst.size();i++) {
@@ -51,8 +53,9 @@ public class DataframeStatistics {
         }
     }
     
-    public <T extends Comparable<T>> T getMaxCol(Object label) throws TypeException {
-        Datacol datac = d.getColumn(label);
+    public <T extends Comparable<T>> T getMaxCol(Object label) throws Exception {
+        Object[] o = {label};
+        Datacol datac = d.getColumns(o).get(0);
         T max = null;
         if (datac != null && CheckTyper.checkType(datac.lst.getClass(), max.getClass())) {
             for (int i=0;i<datac.lst.size();i++) {
