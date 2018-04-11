@@ -38,7 +38,7 @@ public class DataframeStatistics {
         Object[] o = {label};
         Datacol datac = d.getColumns(o).get(0);
         T min = null;
-        if (datac != null && CheckTyper.checkType(datac.lst.getClass(), min.getClass())) {
+        if (CheckTyper.checkType(datac.lst.getClass(), min.getClass())) {
             for (int i=0;i<datac.lst.size();i++) {
                 T t  = (T) datac.lst.get(i);
                 if (min == null) {
@@ -57,7 +57,7 @@ public class DataframeStatistics {
         Object[] o = {label};
         Datacol datac = d.getColumns(o).get(0);
         T max = null;
-        if (datac != null && CheckTyper.checkType(datac.lst.getClass(), max.getClass())) {
+        if (CheckTyper.checkType(datac.lst.getClass(), max.getClass())) {
             for (int i=0;i<datac.lst.size();i++) {
                 T t  = (T) datac.lst.get(i);
                 if (max == null) {
