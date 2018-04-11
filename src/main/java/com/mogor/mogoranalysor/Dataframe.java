@@ -91,6 +91,9 @@ public class Dataframe {
                 throw new TupleSizeException(arg[0],arg.length-1,lab.length);
             }
         }
+        /** Cast Types from String **/
+        // NOT YET IMPLEMENTED
+        
         /** Transform data **/
         //Construction des indexs
         this.indexs = new HashMap<>();
@@ -157,7 +160,7 @@ public class Dataframe {
         return ret;
     }
 
-    public List<Datacol> getColumns(Object[] labels) throws UnknownLabelException {
+    public List<Datacol> getColumns(Object[] labels) throws UnknownException {
         int i;
         List<Datacol> lst = new ArrayList<Datacol>();
         for(Object label : labels) {  
@@ -169,8 +172,28 @@ public class Dataframe {
                 }
             }
             if (i == this.labels.size()) {
-                throw new UnknownLabelException(label.toString());
+                throw new UnknownException("Label",label.toString());
             }
+        }
+        return lst;
+    }
+    
+    public List<List<Object>> getLines(Object[] indexs) throws UnknownException {
+        List<List<Object>> lst = new ArrayList<List<Object>>();
+        List<Object> l;
+        for (Object index : indexs) {
+            l = new ArrayList<Object>();
+            for (Integer el : this.indexs.keySet()) {
+                if (this.indexs.get(el) == index) {
+                    for (Integer el2 : this.labels.keySet()) {
+                        l.add(this.labels.get(el2).lst.get(el));
+                    }
+                }
+            }
+            if (l.isEmpty()) {
+                throw new UnknownException("Index", index.toString());
+            }
+            lst.add(l);
         }
         return lst;
     }
