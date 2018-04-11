@@ -86,7 +86,7 @@ public class Dataframe {
             while ((line = br.readLine()) != null) {
                 args.add(line.split(splitter));
             }
-        } catch (Exception ex) {
+        } catch (FileNotFoundException ex) {
             throw ex;
         }
         /**
@@ -127,7 +127,6 @@ public class Dataframe {
             for (int j = 0; j < args.size(); j++) {
                 lst.add(args.get(j)[i]);
             }
-            System.out.println(lab[i - 1].getClass().toString());
             this.labels.put(index, new Datacol(lab[i - 1], lst));
             index++;
         }

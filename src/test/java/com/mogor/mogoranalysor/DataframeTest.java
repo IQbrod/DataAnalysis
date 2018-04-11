@@ -2,6 +2,8 @@ package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.*;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,9 +16,14 @@ import org.junit.Test;
 
 public class DataframeTest {
     private Dataframe subjectFile;
+    private List idx;
+    private List lbl;
+    private List age;
+    private List sex;
 
     /**  TEST CONSTRUCTEUR  **/
-    /**  Constructeur CSV  **/
+    /**  Constructeur CSV
+     * @throws java.lang.Exception **/
     @Test (expected = FileNotFoundException.class)
     public void testUnexistingConstructorCSV() throws Exception {
         subjectFile = new Dataframe("myfile.csv");
@@ -70,6 +77,99 @@ public class DataframeTest {
             Assert.fail("No Exception should be thrown for data/people.csv");
         }
         Assert.assertTrue("Constructor Passed", true);
+    }
+    
+    /**  Constructeur Brut
+     * @throws java.lang.Exception **/
+    @Test
+    public void testNormalConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex);
+    }
+    
+    @Test (expected=IdxException.class)
+    public void testTooManyIndexsConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack","ERROR");
+        lbl = Arrays.asList("Age","Sex");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex);
+    }
+    
+    @Test (expected=IdxException.class)
+    public void testTooFewIndexsConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre");
+        lbl = Arrays.asList("Age","Sex");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex);
+    }
+    
+    @Test (expected=IdxException.class)
+    public void testTooManyElementsConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex");
+        age = Arrays.asList(24,37,29,30);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex);
+    }
+    
+    @Test (expected=IdxException.class)
+    public void testTooFewElementsConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex");
+        age = Arrays.asList(24,37);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex);
+    }
+    
+    @Test (expected=LabelException.class)
+    public void testTooManyArraysConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        List error = Arrays.asList(0,1,2);
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex,error);
+    }
+    
+    @Test (expected=LabelException.class)
+    public void testTooFewArraysConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age);
+    }
+    
+    @Test (expected=LabelException.class)
+    public void testTooManyLabelsConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex","ERROR");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex);
+    }
+    
+    @Test (expected=LabelException.class)
+    public void testTooFewLabelsConstructor() throws Exception {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        
+        subjectFile = new Dataframe(idx,lbl,age,sex);
     }
     
     /**  TEST METHODES  **/
