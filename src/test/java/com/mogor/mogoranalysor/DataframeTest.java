@@ -52,6 +52,26 @@ public class DataframeTest {
         subjectFile = new Dataframe("data/wrong/minusrow.csv");
     }
     
+    @Test
+    public void testSmallConstructorCSV() throws Exception {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Assert.assertTrue("Constructor Passed", true);
+    }
+    
+    @Test
+    public void testBigConstructorCSV() throws Exception {
+        try {
+            subjectFile = new Dataframe("data/big.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Assert.assertTrue("Constructor Passed", true);
+    }
+    
     /**  TEST METHODES  **/
     @Test
     public void testFullDisplay() {
@@ -60,6 +80,7 @@ public class DataframeTest {
         } catch (Exception ex) {
             Assert.fail("No Exception should be thrown for data/people.csv");
         }
+        Assert.assertTrue("Constructor Passed", true);
         Assert.assertEquals("Index\tage\tsex\t\nJohn\t30\tH\t\nMary\t29\tF\t\nAnna\t18\tF\t\n", subjectFile.toString());
     }
 }
