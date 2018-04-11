@@ -34,12 +34,22 @@ public class DataframeTest {
     
     @Test (expected = EmptyCsvException.class)
     public void testEmptyConstructorCSV() throws Exception {
-        subjectFile = new Dataframe("data/empty.csv");
+        subjectFile = new Dataframe("data/wrong/empty.csv");
     }
     
     @Test (expected = EmptyCsvException.class)
     public void testOnlyLabelsConstructorCSV() throws Exception {
-        subjectFile = new Dataframe("data/labonly.csv");
+        subjectFile = new Dataframe("data/wrong/labonly.csv");
+    }
+    
+    @Test (expected = TupleSizeException.class)
+    public void testPlusRowConstructorCSV() throws Exception {
+        subjectFile = new Dataframe("data/wrong/plusrow.csv");
+    }
+    
+    @Test (expected = TupleSizeException.class)
+    public void testMinusRowConstructorCSV() throws Exception {
+        subjectFile = new Dataframe("data/wrong/minusrow.csv");
     }
     
     /**  TEST METHODES  **/
