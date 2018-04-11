@@ -2,10 +2,7 @@ package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.*;
 import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 
@@ -18,15 +15,6 @@ import org.junit.Test;
 public class DataframeTest {
     private Dataframe subjectFile;
 
-    @Test
-    public void testFullDisplay() {
-        try {
-            subjectFile = new Dataframe("data/people.csv");
-        } catch (Exception ex) {
-            Assert.fail("No Exception should be thrown for data/people.csv");
-        }
-        Assert.assertEquals("Index\tage\tsex\t\nJohn\t30\tH\t\nMary\t29\tF\t\nAnna\t18\tF\t\n", subjectFile.toString());
-    }
     /**  TEST CONSTRUCTEUR  **/
     /**  Constructeur CSV  **/
     @Test (expected = FileNotFoundException.class)
@@ -45,5 +33,14 @@ public class DataframeTest {
     }
     
     /**  TEST METHODES  **/
+    @Test
+    public void testFullDisplay() {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Assert.assertEquals("Index\tage\tsex\t\nJohn\t30\tH\t\nMary\t29\tF\t\nAnna\t18\tF\t\n", subjectFile.toString());
+    }
 }
 

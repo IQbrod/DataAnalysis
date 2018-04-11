@@ -6,8 +6,8 @@
 package com.mogor.mogoranalysor;
 
 import java.util.Arrays;
+import org.junit.Assert;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -16,14 +16,53 @@ import org.junit.Test;
  */
 public class DatacolTest {
     private Datacol subject;
+
+    /**  TEST CONSTRUCTEUR  **/
+    @Test
+    public void testConstructor() throws Exception {
+        
+    }
     
-    @Before
-    public void setup() throws Exception {
-        subject = new Datacol("colTest", Arrays.asList("bonjour","F"));
+    /**  TEST METHODES  **/
+    @Test
+    public void testLabelString() {
+        try {
+            subject = new Datacol("colTest", Arrays.asList("bonjour", "F"));
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown.");
+        }
+        assertEquals("colTest", subject.getLabel().toString());
     }
     
     @Test
-    public void testLabel() {
-        assertEquals("colTest", subject.getLabel().toString());
+    public void testListString() {
+        try {
+            subject = new Datacol("colTest", Arrays.asList("bonjour", "F"));
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown.");
+        }
+        assertEquals("bonjour", subject.getListObject().get(0).toString());
+        assertEquals("F", subject.getListObject().get(1).toString());
+    }
+    
+    @Test
+    public void testLabelInt() {
+        try {
+            subject = new Datacol(2, Arrays.asList("bonjour", "F"));
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown.");
+        }
+        assertEquals(2, (int)subject.getLabel());
+    }
+    
+    @Test
+    public void testListInt() {
+        try {
+            subject = new Datacol("colTest", Arrays.asList(2, 8));
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown.");
+        }
+        assertEquals(2, (int)subject.getListObject().get(0));
+        assertEquals(8, (int)subject.getListObject().get(1));
     }
 }
