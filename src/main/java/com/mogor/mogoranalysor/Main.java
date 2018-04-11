@@ -27,6 +27,7 @@ public class Main {
         try {
             String fName = "people.csv";
             d = new Dataframe("src/main/java/com/mogor/mogoranalysor/csvfiles/"+fName);
+            d.fullDisplay();
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

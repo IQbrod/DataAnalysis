@@ -96,6 +96,27 @@ public class Dataframe {
             }
         }
         /** Transform data **/
+        //Construction des indexs
+        this.indexs = new HashMap<>();
+        int index = 0;
+        for (i=0;i<args.size();i++) {
+            this.indexs.put(index, args.get(i)[0]);
+            index++;
+        }
+        
+        //Construction des labels
+        this.labels = new HashMap<>();
+        index = 0;
+        int len = args.get(0).length;
+        for (i=1; i < len; i++) {
+            List lst = new ArrayList<>();
+            for(int j=0;j<args.size();j++) {
+                lst.add(args.get(j)[i]);
+            }
+            this.labels.put(index, new attr(lab[i-1],lst));
+            index++;
+        }
+        
         
     }
     
