@@ -106,10 +106,14 @@ public class Dataframe {
         /**
          * Transform data *
          */
-        /** Cast Types from String **/
+        /**
+         * Cast Types from String *
+         */
         // NOT YET IMPLEMENTED
-        
-        /** Transform data **/
+
+        /**
+         * Transform data *
+         */
         //Construction des indexs
         this.indexs = new HashMap<>();
         int index = 0;
@@ -194,18 +198,18 @@ public class Dataframe {
                 }
             }
             if (i == this.labels.size()) {
-                throw new UnknownException("Label",label.toString());
+                throw new UnknownException("Label", label.toString());
             }
         }
         return lst;
     }
-    
+
     public List<List<Object>> getLines(Object[] indexs) throws UnknownException {
         List<List<Object>> lst = new ArrayList<List<Object>>();
         for (Object index : indexs) {
             List<Object> l = new ArrayList<Object>();
             for (Integer el : this.indexs.keySet()) {
-                if (this.indexs.get(el) == index) {
+                if (this.indexs.get(el).equals(index)) {
                     for (Integer el2 : this.labels.keySet()) {
                         l.add(this.labels.get(el2).lst.get(el));
                     }

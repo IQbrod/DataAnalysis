@@ -34,8 +34,7 @@ public class Datacol {
     public Object getLabel() {
         return this.label;
     }
-    
-        
+            
     public List<Object> getListObject() {
         return this.lst;
     }
