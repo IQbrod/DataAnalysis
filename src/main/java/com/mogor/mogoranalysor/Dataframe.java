@@ -18,7 +18,7 @@ public class Dataframe {
     private HashMap<Integer, Datacol> labels;
 
     //Constructeur avec tableaux
-    public Dataframe(List indexs, List labels, List... data) throws LabelException, IdxException {
+    public Dataframe(List indexs, List labels, List... data) throws LabelException, IdxException, TypeException {
         /*** Checking DataSet ***/
         if (labels.size() != data.length) {
             throw new LabelException(labels.size(),data.length);
@@ -136,13 +136,11 @@ public class Dataframe {
         return ret;
     }
 
-    public Datacol getColumn(Object label) {
-        for (int i=0; i<this.labels.size();i++) {
-            if (labels.get(i).label == label) {
-                return labels.get(i);
-            }
+    public void checkType() throws TypeException {
+        CheckTyper.checkType(indexs);
+        for (int i=0; i<this.labels.size(); i++) {
+            CheckTyper.checkType(labels.get(i).lst);
         }
-        return null;
     }
 }
 
