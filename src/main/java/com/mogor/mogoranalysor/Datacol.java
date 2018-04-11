@@ -35,7 +35,6 @@ public class Datacol {
         return this.label;
     }
     
-        
     public List<Object> getLisObject() {
         return this.lst;
     }
