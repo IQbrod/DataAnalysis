@@ -79,15 +79,12 @@ public class Dataframe {
         /**
          * Parse file *
          */
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            if ((line = br.readLine()) != null) { //First Line
-                lab = line.split(splitter);
-            }
-            while ((line = br.readLine()) != null) {
-                args.add(line.split(splitter));
-            }
-        } catch (FileNotFoundException ex) {
-            throw ex;
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        if ((line = br.readLine()) != null) { //First Line
+            lab = line.split(splitter);
+        }
+        while ((line = br.readLine()) != null) {
+            args.add(line.split(splitter));
         }
         /**
          * Checking data *
