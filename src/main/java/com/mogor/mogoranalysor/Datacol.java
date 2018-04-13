@@ -23,14 +23,6 @@ public class Datacol {
         CheckTyper.checkType(lst);
     }
     
-    public Class<?> getClassLabel() {
-        return label.getClass(); 
-    }
-    
-    public Class<?> getClassList() {
-        return lst.getClass();
-    }
-    
     public Object getLabel() {
         return this.label;
     }
