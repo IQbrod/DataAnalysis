@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.TypeException;
@@ -11,12 +6,9 @@ import java.util.List;
 
 /**
  *
- * @author adrien
+ * @author MrVhek, IQbrod, Skullhack
  */
 public final class CheckTyper {
-
-    private CheckTyper() {
-    }
 
     public static void checkType(List lst) throws TypeException {
         Class<?> type = null;
