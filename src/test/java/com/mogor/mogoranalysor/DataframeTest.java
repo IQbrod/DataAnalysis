@@ -2,6 +2,7 @@ package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.*;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -266,6 +267,69 @@ public class DataframeTest {
             Assert.fail("No Exception should be thrown for data/people.csv");
         }
         subjectFile.getColumn("ERROR");
+    }
+    
+    @Test
+    public void testGetCols() {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex","Str");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        List str = Arrays.asList("aaa","bbb","ccc");
+        try {
+            subjectFile = new Dataframe(idx,lbl,age,sex,str);
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        
+        try {
+            Object[] o = {"Age","Sex","Str"};
+            List<Datacol> m = subjectFile.getColumns(o);
+            Datacol c = new Datacol("Age",age);
+            Assert.assertEquals(m.get(0).getLabel(), c.getLabel());
+            Assert.assertEquals(m.get(0).getListObject(), c.getListObject());
+            c = new Datacol("Sex",sex);
+            Assert.assertEquals(m.get(1).getLabel(), c.getLabel());
+            Assert.assertEquals(m.get(1).getListObject(), c.getListObject());
+            c = new Datacol("Str",str);
+            Assert.assertEquals(m.get(2).getLabel(), c.getLabel());
+            Assert.assertEquals(m.get(2).getListObject(), c.getListObject());
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for this dataframe");
+        }
+    }
+    
+    @Test (expected=UnknownException.class)
+    public void testGetOnlyWrongCols() throws UnknownException {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Object[] o = {"ERROR"};
+        subjectFile.getColumns(o);
+    }
+    
+    @Test (expected=UnknownException.class)
+    public void testGetWrongCols() throws UnknownException {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Object[] o = {"age","sex","ERROR"};
+        subjectFile.getColumns(o);
+    }
+    
+    @Test
+    public void testEmptyCols() throws UnknownException {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Object[] o = {};
+        Assert.assertEquals(subjectFile.getColumns(o),new ArrayList<Datacol>());
     }
 }
 
