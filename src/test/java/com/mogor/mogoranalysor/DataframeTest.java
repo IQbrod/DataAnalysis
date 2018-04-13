@@ -4,6 +4,8 @@ import com.mogor.mogoranalysor.exceptions.*;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -223,6 +225,47 @@ public class DataframeTest {
         subjectFile.lastLinesDisplay(3); // Max value
         subjectFile.lastLinesDisplay(5); // upper value
         Assert.assertTrue(true);
+    }
+    
+    @Test
+    public void testGetCol() {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex","Str");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        List str = Arrays.asList("aaa","bbb","ccc");
+        try {
+            subjectFile = new Dataframe(idx,lbl,age,sex,str);
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Datacol c,d;
+        try {
+            c = subjectFile.getColumn("Age");
+            d = new Datacol("Age",age);
+            Assert.assertEquals(d.getLabel(), c.getLabel());
+            Assert.assertEquals(d.getListObject(), c.getListObject());
+            c = subjectFile.getColumn("Sex");
+            d = new Datacol("Sex",sex);
+            Assert.assertEquals(d.getLabel(), c.getLabel());
+            Assert.assertEquals(d.getListObject(), c.getListObject());
+            c = subjectFile.getColumn("Str");
+            d = new Datacol("Str",str);
+            Assert.assertEquals(d.getLabel(), c.getLabel());
+            Assert.assertEquals(d.getListObject(), c.getListObject());
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for this dataframe");
+        }
+    }
+    
+    @Test (expected=UnknownException.class)
+    public void testGetWrongCol() throws UnknownException {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        subjectFile.getColumn("ERROR");
     }
 }
 
