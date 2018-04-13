@@ -42,13 +42,10 @@ public class Dataframe {
         this.labels = new HashMap<>();
         index = 0;
         for (int i = 0; i < labels.size(); i++) {
-            try {
-                this.labels.put(index, new Datacol(labels.get(index), data[i]));
-            } catch (TypeException ex) {
-                throw ex;
-            }
+            this.labels.put(index, new Datacol(labels.get(index), data[i]));
             index++;
         }
+        this.checkType();
     }
 
     //Constructeur par CSV
@@ -103,9 +100,6 @@ public class Dataframe {
         /**
          * Transform data *
          */
-        /**
-         * Cast Types from String *
-         */
         // NOT YET IMPLEMENTED
         //Construction des indexs
         this.indexs = new HashMap<>();
@@ -127,6 +121,7 @@ public class Dataframe {
             this.labels.put(index, new Datacol(lab[i - 1], lst));
             index++;
         }
+        this.checkType();
 
     }
 
@@ -171,7 +166,7 @@ public class Dataframe {
         return ret;
     }
 
-    public void checkType() throws TypeException {
+    private void checkType() throws TypeException {
         CheckTyper.checkType(indexs);
         for (int i = 0; i < this.labels.size(); i++) {
             CheckTyper.checkType(labels.get(i).lst);

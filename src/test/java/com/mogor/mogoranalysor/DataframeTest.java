@@ -209,5 +209,20 @@ public class DataframeTest {
         subjectFile.firstLinesDisplay(5); // upper value
         Assert.assertTrue(true);
     }
+    
+    @Test
+    public void testLastLinesDisplay() {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        subjectFile.lastLinesDisplay(-5); // lower Value
+        subjectFile.lastLinesDisplay(0); // Zero value
+        subjectFile.lastLinesDisplay(1); // Min value
+        subjectFile.lastLinesDisplay(3); // Max value
+        subjectFile.lastLinesDisplay(5); // upper value
+        Assert.assertTrue(true);
+    }
 }
 

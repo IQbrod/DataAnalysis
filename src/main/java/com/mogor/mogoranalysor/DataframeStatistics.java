@@ -6,7 +6,6 @@
 package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.TypeException;
-import java.lang.Number;
 /**
  *
  * @author MrVhek,IQBrod, Skullhack
