@@ -2,11 +2,11 @@ package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.*;
 import java.io.*;
+import static java.lang.Integer.max;
+import static java.lang.Integer.min;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -135,12 +135,12 @@ public class Dataframe {
     }
 
     public void firstLinesDisplay(int i) {
-        System.out.println(partial(0, i - 1));
+        System.out.println(partial(0, max(min(i - 1,indexs.keySet().size()),0)));
     }
 
     public void lastLinesDisplay(int i) {
         int s = indexs.keySet().size() - 1;
-        System.out.println(partial(s - i + 1, s));
+        System.out.println(partial(min(max(s - i + 1,0),s), s));
     }
 
     @Override

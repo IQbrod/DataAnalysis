@@ -190,8 +190,24 @@ public class DataframeTest {
         } catch (Exception ex) {
             Assert.fail("No Exception should be thrown for data/people.csv");
         }
-        Assert.assertTrue("Constructor Passed", true);
+        subjectFile.fullDisplay();
+        Assert.assertTrue(true);
         Assert.assertEquals("Index\tage\tsex\t\nJohn\t30\tH\t\nMary\t29\tF\t\nAnna\t18\tF\t\n", subjectFile.toString());
+    }
+    
+    @Test
+    public void testFirstLinesDisplay() {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        subjectFile.firstLinesDisplay(-5); // lower Value
+        subjectFile.firstLinesDisplay(0); // Zero value
+        subjectFile.firstLinesDisplay(1); // Min value
+        subjectFile.firstLinesDisplay(3); // Max value
+        subjectFile.firstLinesDisplay(5); // upper value
+        Assert.assertTrue(true);
     }
 }
 

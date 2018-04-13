@@ -24,8 +24,8 @@ public class DataframeStatistics {
             double moyenne = 0;
             for (Object lst : datac.lst) {
                 Number val = (Number) lst;
-                moyenne += val.doubleValue()
-                        ;           }
+                moyenne += val.doubleValue();
+            }
             return moyenne/datac.lst.size();
         } else {
             throw new TypeException(Number.class, datac.lst.get(0).getClass());
