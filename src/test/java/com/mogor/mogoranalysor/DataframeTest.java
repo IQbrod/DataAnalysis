@@ -329,5 +329,62 @@ public class DataframeTest {
         Object[] o = {};
         Assert.assertEquals(subjectFile.getColumns(o),new ArrayList<Datacol>());
     }
+    
+    @Test
+    public void testGetLines() {
+        idx = Arrays.asList("Paul","Pierre","Jack");
+        lbl = Arrays.asList("Age","Sex","Str");
+        age = Arrays.asList(24,37,29);
+        sex = Arrays.asList('H','F','H');
+        List str = Arrays.asList("aaa","bbb","ccc");
+        try {
+            subjectFile = new Dataframe(idx,lbl,age,sex,str);
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        
+        try {
+            Object[] o = {"Paul","Pierre","Jack"};
+            List<List<Object>> m = subjectFile.getLines(o);
+            Assert.assertEquals(m.get(0), Arrays.asList(24,'H',"aaa"));
+            Assert.assertEquals(m.get(1), Arrays.asList(37,'F',"bbb"));
+            Assert.assertEquals(m.get(2), Arrays.asList(29,'H',"ccc"));            
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for this dataframe");
+        }
+    }
+    
+    @Test (expected=UnknownException.class)
+    public void testGetOnlyWrongLines() throws UnknownException {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Object[] o = {"ERROR"};
+        subjectFile.getLines(o);
+    }
+    
+    @Test (expected=UnknownException.class)
+    public void testGetWrongLines() throws UnknownException {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Object[] o = {"Mary","Anna","ERROR"};
+        subjectFile.getLines(o);
+    }
+    
+    @Test
+    public void testEmptyLines() throws UnknownException {
+        try {
+            subjectFile = new Dataframe("data/people.csv");
+        } catch (Exception ex) {
+            Assert.fail("No Exception should be thrown for data/people.csv");
+        }
+        Object[] o = {};
+        Assert.assertEquals(subjectFile.getLines(o),new ArrayList<List<Object>>());
+    }
 }
 
