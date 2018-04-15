@@ -1,22 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mogor.mogoranalysor;
 
 import com.mogor.mogoranalysor.exceptions.TypeException;
+
 /**
  *
  * @author MrVhek,IQBrod, Skullhack
  */
 public class DataframeStatistics {
+
     private Dataframe d;
-    
+
     public DataframeStatistics(Dataframe d) {
         this.d = d;
     }
-    
+
     public double getMeanCol(Object label) throws Exception {
         Datacol datac = d.getColumn(label);
         if (CheckTyper.checkNumber(datac.lst.get(0))) {
@@ -25,12 +22,12 @@ public class DataframeStatistics {
                 Number val = (Number) lst;
                 moyenne += val.doubleValue();
             }
-            return moyenne/datac.lst.size();
+            return moyenne / datac.lst.size();
         } else {
             throw new TypeException(Number.class, datac.lst.get(0).getClass());
         }
     }
-    
+
     public <T extends Comparable<T>> T getMinCol(Object label) throws Exception {
         Datacol datac = d.getColumn(label);
         T min = null;
@@ -48,7 +45,7 @@ public class DataframeStatistics {
             throw new TypeException(min.getClass(), datac.lst.get(0).getClass());
         }
     }
-    
+
     public <T extends Comparable<T>> T getMaxCol(Object label) throws Exception {
         Datacol datac = d.getColumn(label);
         T max = null;
