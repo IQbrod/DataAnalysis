@@ -126,7 +126,7 @@ public class CheckTyperTest {
         } else {
             Assert.fail("You shall not pass.");
         }
-        Object subject3 = "Test";
+        Object subject3 = null;
         if (CheckTyper.checkComparable(subject3)) {
             Assert.fail("You shall not pass.");
         } else {

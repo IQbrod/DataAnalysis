@@ -11,26 +11,6 @@ import java.util.logging.Logger;
  */
 public class Main {
     static public void main(String argv[]) {
-        System.out.println("░░░░░░░░░░░░░░▄▄▄▄▄▄▄▄▄▄▄▄░░░░░░░░░░░░░░");
-        System.out.println("░░░░░░░░░░░░▄████████████████▄░░░░░░░░░░");
-        System.out.println("░░░░░░░░░░▄██▀░░░░░░░▀▀████████▄░░░░░░░░");
-        System.out.println("░░░░░░░░░▄█▀░░░░░░░░░░░░░▀▀██████▄░░░░░░");
-        System.out.println("░░░░░░░░░███▄░░░░░░░░░░░░░░░▀██████░░░░░");
-        System.out.println("░░░░░░░░▄░░▀▀█░░░░░░░░░░░░░░░░██████░░░░");
-        System.out.println("░░░░░░░█▄██▀▄░░░░░▄███▄▄░░░░░░███████░░░");
-        System.out.println("░░░░░░▄▀▀▀██▀░░░░░▄▄▄░░▀█░░░░█████████░░");
-        System.out.println("░░░░░▄▀░░░░▄▀░▄░░█▄██▀▄░░░░░██████████░░");
-        System.out.println("░░░░░█░░░░▀░░░█░░░▀▀▀▀▀░░░░░██████████▄░");
-        System.out.println("░░░░░░░▄█▄░░░░░▄░░░░░░░░░░░░██████████▀░");
-        System.out.println("░░░░░░█▀░░░░▀▀░░░░░░░░░░░░░███▀███████░░");
-        System.out.println("░░░▄▄░▀░▄░░░░░░░░░░░░░░░░░░▀░░░██████░░░");
-        System.out.println("██████░░█▄█▀░▄░░██░░░░░░░░░░░█▄█████▀░░░");
-        System.out.println("██████░░░▀████▀░▀░░░░░░░░░░░▄▀█████████▄");
-        System.out.println("██████░░░░░░░░░░░░░░░░░░░░▀▄████████████");
-        System.out.println("██████░░▄░░░░░░░░░░░░░▄░░░██████████████");
-        System.out.println("██████░░░░░░░░░░░░░▄█▀░░▄███████████████");
-        System.out.println("███████▄▄░░░░░░░░░▀░░░▄▀▄███████████████");
-
         List idx = Arrays.asList("Paul","Pierre","Jack");
         List lbl = Arrays.asList("Age","Sex");
         List age = Arrays.asList(24,37,29);

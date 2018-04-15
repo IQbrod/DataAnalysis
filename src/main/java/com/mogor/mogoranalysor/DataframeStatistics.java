@@ -42,7 +42,7 @@ public class DataframeStatistics {
             }
             return min;
         } else {
-            throw new TypeException(min.getClass(), datac.lst.get(0).getClass());
+            throw new TypeException(Comparable.class, datac.lst.get(0).getClass());
         }
     }
 
@@ -60,7 +60,7 @@ public class DataframeStatistics {
             }
             return max;
         } else {
-            throw new TypeException(max.getClass(), datac.lst.get(0).getClass());
+            throw new TypeException(Comparable.class, datac.lst.get(0).getClass());
         }
     }
 }

@@ -1,7 +1,7 @@
-moy=1,moy=30,wrong,moy=17.9
-0,1,15,Hello,19
+max=1,max=45,wrong,max=26.5
+0,1,15,Hello,19.0
 1,1,30,test,26.5
 2,1,45,pas,8.2
-3,1,15,de,19
+3,1,15,de,19.0
 4,1,30,moy,26.5
 5,1,45,possible,8.2
