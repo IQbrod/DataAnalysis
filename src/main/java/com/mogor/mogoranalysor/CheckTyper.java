@@ -9,6 +9,8 @@ import java.util.List;
  * @author MrVhek, IQbrod, Skullhack
  */
 public final class CheckTyper {
+    
+    public CheckTyper() {}
 
     public static void checkType(List lst) throws TypeException {
         Class<?> type = null;
@@ -43,12 +45,12 @@ public final class CheckTyper {
     public static boolean checkType(Class<?> expected, Class<?> given) {
         return (expected == given);
     }
-    
+
     public static boolean checkNumber(Object given) {
-         return (given instanceof Number);
+        return (given instanceof Number);
     }
-    
+
     public static boolean checkComparable(Object given) {
-         return (given instanceof Comparable);
+        return (given instanceof Comparable);
     }
 }

@@ -60,7 +60,7 @@ public class CheckTyperTest {
     public void testCheckTypeObject() {
         int subject1 = 2;
         int subject2 = 8;
-        if (CheckTyper.checkType(subject1, subject2)) {            
+        if (CheckTyper.checkType(subject1, subject2)) {
             Assert.assertTrue("Same type should trigger this", true);
         } else {
             Assert.fail("You shall not pass.");
@@ -112,7 +112,7 @@ public class CheckTyperTest {
         }
     }
 
-     @Test
+    @Test
     public void testCheckComparable() {
         int subject1 = 8;
         if (CheckTyper.checkComparable(subject1)) {
