@@ -20,6 +20,11 @@ import org.junit.Test;
 public class CheckTyperTest {
 
     @Test
+    public void CheckTyperTest() {
+        CheckTyper c = new CheckTyper();
+    }
+    
+    @Test
     public void testCheckTypeList() throws Exception {
         try {
             List subject = Arrays.asList("bonjour", "F", "test");
